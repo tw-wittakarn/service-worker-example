@@ -27,11 +27,6 @@
                 }));
               }
             });
-
-            // Request initial token
-            if (navigator.serviceWorker.controller) {
-              navigator.serviceWorker.controller.postMessage({ type: 'PING' });
-            }
           })
           .catch((error) => {
             console.error('Service Worker registration failed:', error);

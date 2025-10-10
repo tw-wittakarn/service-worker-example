@@ -19,14 +19,14 @@ const refreshToken = () => {
 self.addEventListener('activate', (event) => {
   console.log('Service Worker activated');
 
-  // Set up interval to refresh every minute (60000ms)
+  // Set up interval to refresh every minute (5000ms)
   if (tokenRefreshInterval) {
     clearInterval(tokenRefreshInterval);
   }
 
   tokenRefreshInterval = setInterval(() => {
     refreshToken();
-  }, 60000); // 60 seconds
+  }, 5000); // 5 seconds
 
   event.waitUntil(self.clients.claim());
 });
@@ -34,11 +34,4 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('install', (event) => {
   console.log('Service Worker installed');
   self.skipWaiting();
-});
-
-// Clean up on service worker termination
-self.addEventListener('message', (event) => {
-  if (event.data.type === 'PING') {
-    refreshToken();
-  }
 });

@@ -1,6 +1,6 @@
 # React Token Refresher with Service Worker
 
-A React application that uses Jotai for state management and a Service Worker to automatically refresh tokens every minute.
+A React application that uses Jotai for state management and a Service Worker to automatically refresh tokens every 5 seconds.
 
 ## Features
 
@@ -9,14 +9,14 @@ A React application that uses Jotai for state management and a Service Worker to
 - **Service Worker** registered in vanilla JavaScript in `index.html`
 - Token is generated using `Date.now()` in the service worker
 - Real-time token display in the UI
-- Initial token passed as prop, subsequent updates from service worker
+- Automatic token refresh every 5 seconds
 
 ## How it works
 
-1. React app starts with an initial token from `Date.now()` passed as a prop
-2. Service Worker is registered in `index.html` using vanilla JavaScript
-3. The Service Worker runs in the background and generates a new token using `Date.now()` every 60 seconds
-4. The token is sent from the Service Worker to the React app via `postMessage` and custom events
+1. Service Worker is registered in `index.html` using vanilla JavaScript
+2. Once activated, the Service Worker runs in the background and automatically generates a new token every 5 seconds using `Date.now()`
+3. Tokens are sent from the Service Worker to all clients via `postMessage` with type `TOKEN_REFRESH`
+4. The page listens for `TOKEN_REFRESH` messages and dispatches custom `tokenUpdate` events
 5. The React app listens for `tokenUpdate` events and updates the Jotai state
 6. The UI automatically displays the current token value
 
