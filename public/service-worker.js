@@ -19,7 +19,7 @@ const refreshToken = () => {
 self.addEventListener('activate', (event) => {
   console.log('Service Worker activated');
 
-  // Set up interval to refresh every minute (5000ms)
+  // Set up interval to refresh every 5 seconds (5000ms)
   if (tokenRefreshInterval) {
     clearInterval(tokenRefreshInterval);
   }
